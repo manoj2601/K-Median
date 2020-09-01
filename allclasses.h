@@ -4,11 +4,8 @@
 #include <bits/stdc++.h>
 #include <fstream>
 #include <string>
-#include "allclasses.h"
 #define MAX_SIZE INT_MAX
 using namespace std;
-
-
 
 class Node
 {
@@ -16,14 +13,16 @@ class Node
     int initialid; //initial id given in input file
     int weight;                     //weight of the node.
     Node* parent;                   //parent of the node(only one parent is possible)
+    int parentEdgeWeight = 1;
     int post_order_number;
+    int ini_number;
     vector<Node*> node_child;       //vector to store the children of the node.
-    Node(int weight, Node* parent)  //constructor
+    Node(int weight, Node* parent, int ini_number)  //constructor
     {
         this->weight = weight;
         this->parent = parent;
+        this->ini_number = ini_number;
     }
-  
     void add_child_in_node(Node* node)  //function to add the children of the node to a vector.
     {
         node_child.push_back(node);
@@ -69,17 +68,26 @@ class ObjectL1
 {
 public:
     Node* node;     //reference node. 
-    int node_number;    
+    int post_order_number;    
     Node* mv;       // Node mv
-    Node* mv_prime; //Node mv' 
+    Node* mv_prime; //Node mv' this is found wrong
 
-    ObjectL1(Node* node, Node* mv, Node* mv_prime, int node_number)
+    ObjectL1(Node* node, Node* mv, int node_number)
     {
         this->node = node;
         this->mv = mv;
-        this->mv_prime = mv_prime;
-        this->node_number = node_number;
+        // this->mv_prime = nullptr;
+        this->post_order_number = node_number;
         node->post_order_number = node_number;
+        // node->post_order_number = node_number;
+    }
+
+    void printObj()
+    {
+        // cout<<"ini_number : "<<node->ini_number;
+        // cout<<" po number : "<<post_order_number;
+        // cout<<" mv : "<<mv->ini_number;
+        // cout<<" mvp : "<<mv_prime->ini_number<<endl;
     }
 
 };
